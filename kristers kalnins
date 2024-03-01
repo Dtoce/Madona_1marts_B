@@ -1,0 +1,120 @@
+1.uz
+"1.uz"
+import csv
+
+filename = "PD.csv"
+
+with open(filename, "r", encoding"utf-8") as fail:
+    csv_reader = csv.reader(fail)
+    for row in csv_reader:
+        print(row)
+2.uz
+filename="2pd.txt"
+with open(filename, "r", encoding="utf=8") as faile:
+    for line in fail:
+        masina=car.split()
+        if len(masina) >=4:
+            print(masina[3])
+3.uz
+import json
+with open ("3pd.json", "r") as f:
+    data=json.load(f)
+print("Mašīna:", data["car"])
+print("Vārds:", data[name])
+print("Uzvārds:", data[surname])
+
+4.uz
+import json
+import csv
+
+def lasit_json_failu(nosaukums):
+    try:
+        with open(nosaukums, 'r') as fails:
+            dati = json.load(fails)
+        return dati
+    except FileNotFoundError:
+        print("Norādītais JSON fails nav atrasts.")
+        return None
+    except json.JSONDecodeError:
+        print("Neizdevās ielasīt JSON failu.")
+        return None
+
+def lasit_txt_failu(nosaukums):
+    try:
+        with open(nosaukums, 'r') as fails:
+            dati = fails.read()
+        return dati
+    except FileNotFoundError:
+        print("Norādītais TXT fails nav atrasts.")
+        return None
+
+def lasit_csv_failu(nosaukums):
+    try:
+        with open(nosaukums, 'r', newline='') as fails:
+            lasitajs = csv.reader(fails)
+            dati = [rinda for rinda in lasitajs]
+        return dati
+    except FileNotFoundError:
+        print("Norādītais CSV fails nav atrasts.")
+        return None
+    except csv.Error:
+        print("Neizdevās ielasīt CSV failu.")
+        return None
+
+def izdrukat_faila_saturs(dati):
+    if dati:
+        print("Faila saturs:")
+        if isinstance(dati, dict):  # Ja dati ir JSON formātā
+            for elements in dati:
+                print(f"{elements}: {dati[elements]}")
+        elif isinstance(dati, list):  # Ja dati ir CSV formātā
+            for rinda in dati:
+                print(rinda)
+        else:  # Ja dati ir TXT formātā
+            print(dati)
+    else:
+        print("Faila dati nav pieejami.")
+
+if __name__ == "__main__":
+    try:
+        faila_nosaukums = input("Lūdzu, ievadiet faila nosaukumu: ")
+        faila_formats = input("Lūdzu, ievadiet faila formātu (json, txt vai csv): ").lower()
+
+        if faila_formats == 'json':
+            dati = lasit_json_failu(faila_nosaukums)
+        elif faila_formats == 'txt':
+            dati = lasit_txt_failu(faila_nosaukums)
+        elif faila_formats == 'csv':
+            dati = lasit_csv_failu(faila_nosaukums)
+        else:
+            print("Nepareizs faila formāts. Atļautie formāti ir json, txt vai csv.")
+            dati = None
+
+        izdrukat_faila_saturs(dati)
+    except KeyboardInterrupt:
+        print("\nIziet no programmas.")
+    except Exception as e:
+        print(f"Kļūda: {e}")
+
+5.uz
+def ierakstit_vardu_faila(vards, fails_nosaukums):
+    try:
+        with open(fails_nosaukums, 'a') as fails:
+            fails.write(vards + '\n')
+        print("Vārds veiksmīgi ierakstīts failā.")
+    except FileNotFoundError:
+        print("Norādītais fails nav atrasts.")
+    except Exception as e:
+        print(f"Notika kļūda: {e}. Vārds netika ierakstīts failā.")
+
+if __name__ == "__main__":
+    try:
+        while True:
+            vards = input("Lūdzu, ievadiet savu vārdu (vai 'iziet', lai izietu): ")
+            if vards.lower() == 'iziet':
+                break
+            ierakstit_vardu_faila(vards, "lietotajs.txt")
+    except KeyboardInterrupt:
+        print("\nIziet no programmas.")
+    except Exception as e:
+        print(f"Notika neparedzēta kļūda: {e}.")
